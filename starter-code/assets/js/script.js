@@ -1,13 +1,9 @@
-const textField = document.getElementById("password-value");
+const textField = document.getElementById("passwordValue");
 const copyButton = document.getElementById("copy-button");
 const value = document.querySelector("#password-length-value");
 const input = document.querySelector("#password-length");
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
 
-// Test to change the value of the text field after 2 seconds
-setTimeout(() => {
-    textField.value = "Contenido para copiar";
-}, 2000);
 
 // Function to copy to clipboard
 copyButton.addEventListener("click", () => {
@@ -77,4 +73,39 @@ function updateStrength(strength) {
     strengthText.textContent = text;
     strengthText.className = `strength-label ${className}`;
 }
+
+const generatePassword = () => {
+    const includeLowercase = document.getElementById('lowercase-letters').checked;
+    const includeUppercase = document.getElementById('uppercase-letters').checked;
+    const includeNumbers = document.getElementById('numbers').checked;
+    const includeSpecial = document.getElementById('symbols').checked;
+
+    const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+    const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numberChars = "0123456789";
+    const specialChars = "!@#$%^&*()_+[]{}|;:',.<>?/`~";
+
+    let charPool = "";
+
+    if (includeLowercase) charPool += lowercaseChars;
+    if (includeUppercase) charPool += uppercaseChars;
+    if (includeNumbers) charPool += numberChars;
+    if (includeSpecial) charPool += specialChars;
+
+    const passwordLength = value.textContent; // Puedes ajustar el tamaño de la contraseña
+    let password = "";
+
+    if (charPool.length > 0) {
+      for (let i = 0; i < passwordLength; i++) {
+        const randomIndex = Math.floor(Math.random() * charPool.length);
+        password += charPool[randomIndex];
+      }
+    } else {
+      password = "Select at least one option!";
+    }
+
+    document.getElementById('passwordValue').value = password;
+}
+
+document.getElementById('generatePassword').addEventListener('click', generatePassword);
 
