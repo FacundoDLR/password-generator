@@ -8,6 +8,36 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
 
   <title>Frontend Mentor | Password generator app</title>
+  <style>
+    .container {
+      width: 300px;
+      text-align: center;
+    }
+
+    .strength-label {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .strength-bar {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 10px;
+    }
+
+    .bar {
+      flex: 1;
+      height: 10px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .filled {
+      background-color: #4caf50;
+      /* Cambia color según fuerza */
+    }
+  </style>
 </head>
 
 <body>
@@ -17,6 +47,7 @@
       <h1>Password Generator</h1>
     </header>
     <main>
+
       <div class="password-field">
         <input type="text" class="password-field readonly-field" id="password-value" placeholder="P4$5W0rD!" readonly />
         <button class="copy-button" id="copy-button">
@@ -27,40 +58,43 @@
           </svg>
         </button>
       </div>
+
       <div class="password-box">
         <div class="password-length-field">
-          <label for="password-length"><span>Character Length</span> <output id="password-length-value">8</output></label>
-          <input type="range" id="password-length" name="password-length" value="8" min="1" max="20" step="1">
+          <label for="password-length"><span>Character Length</span> <output
+              id="password-length-value">8</output></label>
+          <input type="range" id="password-length" name="password-length" value="8" min="0" max="20" step="1">
         </div>
         <div class="password-options">
           <div class="password-option">
             <label for="uppercase-letters">Include Uppercase Letters</label>
-            <input type="checkbox" id="uppercase-letters" name="uppercase-letters" checked>
+            <input type="checkbox" id="uppercase-letters" name="uppercase-letters" value="Include Uppercase Letters">
           </div>
           <div class="password-option">
             <label for="lowercase-letters">Include Lowercase Letters</label>
-            <input type="checkbox" id="lowercase-letters" name="lowercase-letters" checked>
+            <input type="checkbox" id="lowercase-letters" name="lowercase-letters" value="Include Lowercase Letters">
           </div>
           <div class="password-option">
             <label for="numbers">Include Numbers</label>
-            <input type="checkbox" id="numbers" name="numbers" checked>
+            <input type="checkbox" id="numbers" name="numbers" value="Include Numbers">
           </div>
           <div class="password-option">
             <label for="symbols">Include Symbols</label>
-            <input type="checkbox" id="symbols" name="symbols" checked>
+            <input type="checkbox" id="symbols" name="symbols" value="Include Symbols">
           </div>
         </div>
-        <div class="password-strength">
+
+        <div class="password-strength container">
           <label for="password-strength">Strength</label>
-          <div class="strength-label" id="strengthLabel">Weak</div>
+          <div class="strength-label" id="strengthLabel"></div>
           <div class="strength-bar" id="strengthBar">
             <div class="bar" data-index="1"></div>
             <div class="bar" data-index="2"></div>
             <div class="bar" data-index="3"></div>
             <div class="bar" data-index="4"></div>
           </div>
-          <progress id="password-strength" value="0" max="100"></progress>
         </div>
+
         <button class="button">Generate</button>
       </div>
     </main>
@@ -69,7 +103,7 @@
     </footer>
   </div>
 
-
+  <script src="./assets/js/script.js"></script>
 </body>
 
 </html>
