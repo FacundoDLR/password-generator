@@ -3,109 +3,84 @@ const copyButton = document.getElementById("copy-button");
 const value = document.querySelector("#password-length-value");
 const input = document.querySelector("#password-length");
 const checkboxes = document.querySelectorAll("input[type='checkbox']");
+const generateButton = document.getElementById("generatePassword");
+const bars = document.querySelectorAll('.bar');
+const strengthText = document.getElementById('strengthLabel');
 
+const CHAR_SETS = {
+    lowercase: "abcdefghijklmnopqrstuvwxyz",
+    uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    numbers: "0123456789",
+    symbols: "!@#$%^&*()_+[]{}|;:',.<>?/`~",
+};
+
+// Password length value
+const updateLengthDisplay = (length) => value.textContent = length;
+updateLengthDisplay(input.value);
+
+input.addEventListener("input", (event) => updateLengthDisplay(event.target.value));
 
 // Function to copy to clipboard
-copyButton.addEventListener("click", () => {
+const copytoClipboard = () => {
     if (textField.value) {
         navigator.clipboard.writeText(textField.value)
-            .then(() => {
-                alert("¡Texto copiado al portapapeles!");
-            })
-            .catch(err => {
-                console.error("Error al copiar texto:", err);
-            });
+            .then(() => alert("¡Texto copiado al portapapeles!"))
+            .catch(err => console.error("Error al copiar texto:", err));
     } else {
         alert("El campo está vacío, no hay nada que copiar.");
     }
-});
+};
 
-// Password length value
-value.textContent = input.value;
-input.addEventListener("input", (event) => {
-    value.textContent = event.target.value;
-});
+copyButton.addEventListener('click', copytoClipboard);
 
-function handleCheckbox() {
-    // Obtaining checked items
-    const checkedItems = Array.from(checkboxes)
-        .filter(checkbox => checkbox.checked)
-        .map(checkbox => checkbox.value);
-
-    // Update strength bar
-    updateStrength(checkedItems.length);
-}
-
-// Agregar un evento change a cada checkbox
-checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', handleCheckbox);
-});
+// Get checked options
+const getCheckedOptions = () => Array.from(checkboxes).filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
 
 // Strength bar value
 function updateStrength(strength) {
-    const bars = document.querySelectorAll('.bar');
-    const strengthText = document.getElementById('strengthLabel');
 
-    // Reset all bars
+    const strengthLevels = ["Too weak", "Weak", "Medium", "Strong"];
+    const classNames = ["too-weak", "weak", "medium", "strong"];
+
+    // Reset strength bar and text
     bars.forEach(bar => bar.classList.remove('filled'));
-
-    // Fill bars according to strength
     for (let i = 0; i < strength; i++) {
         bars[i].classList.add('filled');
     }
 
-    // Update strength text
-    let text = '';
-    let className = 'too-weak';
-    if (strength === 1) {
-        text = 'Too weak';
-        className = 'too-weak';
-    } else if (strength === 2) {
-        text = 'Weak';
-        className = 'weak';
-    } else if (strength === 3) {
-        text = 'Medium';
-        className = 'medium';
-    } else if (strength === 4) {
-        text = 'Strong';
-        className = 'strong';
-    }
-    strengthText.textContent = text;
-    strengthText.className = `strength-label ${className}`;
+    strengthText.textContent = strengthLevels[strength - 1] || "";
+    strengthText.className = `strength-label ${classNames[strength - 1] || ""}`;
+};
+
+// Agregar un evento change a cada checkbox
+const handleCheckbox = () => {
+    // Update strength bar
+    updateStrength(getCheckedOptions().length);
 }
 
+checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', handleCheckbox);
+});
+
 const generatePassword = () => {
-    const includeLowercase = document.getElementById('lowercase-letters').checked;
-    const includeUppercase = document.getElementById('uppercase-letters').checked;
-    const includeNumbers = document.getElementById('numbers').checked;
-    const includeSpecial = document.getElementById('symbols').checked;
 
-    const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-    const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numberChars = "0123456789";
-    const specialChars = "!@#$%^&*()_+[]{}|;:',.<>?/`~";
+    const selectedOptions = getCheckedOptions();
+    let charPool = selectedOptions.map(option => CHAR_SETS[option.toLowerCase()]).join('');
 
-    let charPool = "";
-
-    if (includeLowercase) charPool += lowercaseChars;
-    if (includeUppercase) charPool += uppercaseChars;
-    if (includeNumbers) charPool += numberChars;
-    if (includeSpecial) charPool += specialChars;
-
-    const passwordLength = value.textContent; // Puedes ajustar el tamaño de la contraseña
+    const passwordLength = parseInt(value.textContent, 10); // You can adjust the password size
     let password = "";
 
     if (charPool.length > 0) {
-      for (let i = 0; i < passwordLength; i++) {
-        const randomIndex = Math.floor(Math.random() * charPool.length);
-        password += charPool[randomIndex];
-      }
+        for (let i = 0; i < passwordLength; i++) {
+            const randomIndex = Math.floor(Math.random() * charPool.length);
+            password += charPool[randomIndex];
+        }
     } else {
-      password = "Select at least one option!";
+        password = "Select at least one option!";
     }
 
-    document.getElementById('passwordValue').value = password;
+    textField.value = password;
 }
 
-document.getElementById('generatePassword').addEventListener('click', generatePassword);
+generateButton.addEventListener('click', generatePassword);
 
