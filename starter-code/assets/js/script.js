@@ -52,9 +52,8 @@ function updateStrength(strength) {
     strengthText.className = `strength-label ${classNames[strength - 1] || ""}`;
 };
 
-// Agregar un evento change a cada checkbox
+// Update strength bar
 const handleCheckbox = () => {
-    // Update strength bar
     updateStrength(getCheckedOptions().length);
 }
 
@@ -65,20 +64,41 @@ checkboxes.forEach(checkbox => {
 const generatePassword = () => {
 
     const selectedOptions = getCheckedOptions();
-    let charPool = selectedOptions.map(option => CHAR_SETS[option.toLowerCase()]).join('');
-
     const passwordLength = parseInt(value.textContent, 10); // You can adjust the password size
-    let password = "";
 
-    if (charPool.length > 0) {
-        for (let i = 0; i < passwordLength; i++) {
-            const randomIndex = Math.floor(Math.random() * charPool.length);
-            password += charPool[randomIndex];
-        }
-    } else {
-        password = "Select at least one option!";
+    if (selectedOptions.length === 0) {
+        textField.value = "Select at least one option!";
+        return;
     }
 
+    if (passwordLength === 0) {
+        alert("La longitud de la contraseña no puede ser cero. Por favor, aumenta el valor.");
+        textField.value = "";
+        return;
+    }
+
+    if (passwordLength < selectedOptions.length) {
+        alert(`La longitud de la contraseña (${passwordLength}) es menor que las opciones seleccionadas (${selectedOptions.length}). Generando con las primeras ${passwordLength} opciones.`);
+        selectedOptions.splice(passwordLength); // Reduce to first 'passwordLength' options
+    }
+
+    let password = "";
+    let charPool = "";
+
+    // Add at least one character from each selected option
+    selectedOptions.forEach(option => {
+        const charSet = CHAR_SETS[option.toLowerCase()];
+        password += charSet[Math.floor(Math.random() * charSet.length)];
+        charPool += charSet; // Add all characters to the pool
+    });
+
+    while (password.length < passwordLength) {
+        const randomIndex = Math.floor(Math.random() * charPool.length);
+        password += charPool[randomIndex];
+    }
+
+    // Shuffle the password
+    password = password.split('').sort(() => Math.random() - 0.5).join('');
     textField.value = password;
 }
 
