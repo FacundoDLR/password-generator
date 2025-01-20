@@ -1,0 +1,189 @@
+@font-face {
+  font-family: "Space Mono";
+  src: url("../fonts/static/JetBrainsMono-Bold.ttf");
+}
+/* ------------------------------
+   Variables CSS
+------------------------------ */
+:root {
+  --font-primary: "Space Mono", serif;
+  --font-size-large: clamp(2rem, 1.688rem + 1.33vw, 2.688rem); /* 32px - 43px */
+  --font-size-medium: clamp(
+    1.5rem,
+    1.301rem + 0.85vw,
+    1.938rem
+  ); /* 24px - 31px */
+  --font-size-regular: clamp(
+    1.125rem,
+    0.983rem + 0.61vw,
+    1.438rem
+  ); /* 18px - 23px */
+
+  --font-weight-bold: 700;
+
+  /* Card Colors */
+  --color-neon-green: #a4ffaf;
+  --color-red: #f64a4a;
+  --color-orange: #fb7c58;
+  --color-yellow: #f8cd65;
+
+  --color-dark-grey: #24232c;
+  --color-grey: #817d92;
+  --color-ashWhite: #e6e5ea;
+  --color-veryDark-grey: #191820;
+
+  --corner-radius: 0.875rem;
+  --error-color: red;
+}
+
+/* ------------------------------
+     Reset Global
+  ------------------------------ */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ------------------------------
+   Base Styles
+------------------------------ */
+body,
+input,
+button,
+div {
+  font-family: var(--font-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+h1 {
+  font-size: var(--font-size-medium);
+}
+
+.container {
+  min-width: 21.4375rem;
+}
+
+.password-field-container {
+  min-height: 4rem; /* 64px */
+  border: 1px solid red;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.password-field {
+  border: none;
+  width: 100%;
+}
+.copy-button {
+  border: none;
+  background-color: transparent;
+}
+.copy-field {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+}
+
+.password-length-field {
+  min-height: 4.1875rem; /* 67px */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid red;
+}
+
+/* slider thumb */
+input[type="range"] {
+  -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  background: #ddd;
+  border: none;
+  border-radius: 3px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  background: goldenrod;
+  margin-top: -11px;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+input[type="range"]:focus::-webkit-slider-runnable-track {
+  background: #b24242;
+}
+
+input[type="range"]::-ms-fill-lower {
+  background: #777;
+  border-radius: 10px;
+}
+input[type="range"]::-ms-fill-upper {
+  background: #ddd;
+  border-radius: 10px;
+}
+
+.password-options {
+  min-height: 8.25rem; /* 132px */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  border: 1px solid red;
+}
+
+.password-strength,
+#generatePassword {
+  min-height: 3.5rem; /* 56px */
+  border: 1px solid red;
+}
+
+.password-strength {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 1rem;
+}
+
+.password-box {
+  padding: 1rem;
+  border: 1px solid red;
+}
+
+.button {
+  width: 100%;
+}
+
+.password-option {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.strength-display {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}

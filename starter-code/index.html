@@ -18,20 +18,18 @@
 
     .strength-label {
       font-size: 18px;
-      margin-bottom: 10px;
     }
 
     .strength-bar {
       display: flex;
-      gap: 5px;
-      margin-bottom: 10px;
+      gap: 0.5rem;
     }
 
     .bar {
       flex: 1;
-      height: 10px;
+      width: 10px;
+      height: 28px;
       background-color: #e0e0e0;
-      border-radius: 5px;
       transition: background-color 0.3s;
     }
 
@@ -40,26 +38,30 @@
       /* Cambia color según fuerza */
     }
   </style>
+  <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
 <body>
 
-  <div>
+  <div class="container">
     <header>
       <h1>Password Generator</h1>
     </header>
     <main>
 
-      <div class="password-field">
+      <div class="password-field-container">
         <input type="text" class="password-field readonly-field" id="passwordValue" placeholder="P4$5W0rD!" readonly
           aria-label="Generated password, read-only" />
-        <button class="copy-button" id="copy-button" aria-label="Copy generated password">
-          <svg width="21" height="24" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M20.341 3.091 17.909.659A2.25 2.25 0 0 0 16.319 0H8.25A2.25 2.25 0 0 0 6 2.25V4.5H2.25A2.25 2.25 0 0 0 0 6.75v15A2.25 2.25 0 0 0 2.25 24h10.5A2.25 2.25 0 0 0 15 21.75V19.5h3.75A2.25 2.25 0 0 0 21 17.25V4.682a2.25 2.25 0 0 0-.659-1.591ZM12.469 21.75H2.53a.281.281 0 0 1-.281-.281V7.03a.281.281 0 0 1 .281-.281H6v10.5a2.25 2.25 0 0 0 2.25 2.25h4.5v1.969a.282.282 0 0 1-.281.281Zm6-4.5H8.53a.281.281 0 0 1-.281-.281V2.53a.281.281 0 0 1 .281-.281H13.5v4.125c0 .621.504 1.125 1.125 1.125h4.125v9.469a.282.282 0 0 1-.281.281Zm.281-12h-3v-3h.451c.075 0 .147.03.2.082L18.667 4.6a.283.283 0 0 1 .082.199v.451Z"
-              fill="#A4FFAF" />
-          </svg>
-        </button>
+          <div class="copy-field">
+            <span id="copiedText"></span>
+            <button class="copy-button" id="copy-button" aria-label="Copy generated password">
+              <svg width="21" height="24" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20.341 3.091 17.909.659A2.25 2.25 0 0 0 16.319 0H8.25A2.25 2.25 0 0 0 6 2.25V4.5H2.25A2.25 2.25 0 0 0 0 6.75v15A2.25 2.25 0 0 0 2.25 24h10.5A2.25 2.25 0 0 0 15 21.75V19.5h3.75A2.25 2.25 0 0 0 21 17.25V4.682a2.25 2.25 0 0 0-.659-1.591ZM12.469 21.75H2.53a.281.281 0 0 1-.281-.281V7.03a.281.281 0 0 1 .281-.281H6v10.5a2.25 2.25 0 0 0 2.25 2.25h4.5v1.969a.282.282 0 0 1-.281.281Zm6-4.5H8.53a.281.281 0 0 1-.281-.281V2.53a.281.281 0 0 1 .281-.281H13.5v4.125c0 .621.504 1.125 1.125 1.125h4.125v9.469a.282.282 0 0 1-.281.281Zm.281-12h-3v-3h.451c.075 0 .147.03.2.082L18.667 4.6a.283.283 0 0 1 .082.199v.451Z"
+                  fill="#A4FFAF" />
+              </svg>
+            </button>
+          </div>
       </div>
 
       <div class="password-box">
@@ -73,35 +75,40 @@
 
         <div class="password-options">
           <div class="password-option">
-            <label for="uppercase-letters">Include Uppercase Letters</label>
             <input type="checkbox" id="uppercase-letters" name="uppercase-letters" value="uppercase">
+            <label for="uppercase-letters">Include Uppercase Letters</label>
           </div>
           <div class="password-option">
-            <label for="lowercase-letters">Include Lowercase Letters</label>
             <input type="checkbox" id="lowercase-letters" name="lowercase-letters" value="lowercase">
+            <label for="lowercase-letters">Include Lowercase Letters</label>
           </div>
           <div class="password-option">
-            <label for="numbers">Include Numbers</label>
             <input type="checkbox" id="numbers" name="numbers" value="numbers">
+            <label for="numbers">Include Numbers</label>
           </div>
           <div class="password-option">
-            <label for="symbols">Include Symbols</label>
             <input type="checkbox" id="symbols" name="symbols" value="symbols">
+            <label for="symbols">Include Symbols</label>
           </div>
         </div>
 
-        <section class="password-strength container">
+        <section class="password-strength">
           <label for="password-strength">Strength</label>
-          <div class="strength-label" id="strengthLabel" aria-live="polite"></div>
-          <div class="strength-bar" id="strengthBar">
-            <div class="bar" data-index="1" aria-label="Strength level 1: Too Weak"></div>
-            <div class="bar" data-index="2" aria-label="Strength level 2: Weak"></div>
-            <div class="bar" data-index="3" aria-label="Strength level 3: Medium"></div>
-            <div class="bar" data-index="4" aria-label="Strength level 4: Strong"></div>
+          <div class="strength-display">
+            <div class="strength-label" id="strengthLabel" aria-live="polite"></div>
+            <div class="strength-bar" id="strengthBar">
+              <div class="bar" data-index="1" aria-label="Strength level 1: Too Weak"></div>
+              <div class="bar" data-index="2" aria-label="Strength level 2: Weak"></div>
+              <div class="bar" data-index="3" aria-label="Strength level 3: Medium"></div>
+              <div class="bar" data-index="4" aria-label="Strength level 4: Strong"></div>
+            </div>
           </div>
         </section>
 
-        <button class="button" id="generatePassword">Generate</button>
+        <button class="button" id="generatePassword">GENERATE <svg width="12" height="12"
+            xmlns="http://www.w3.org/2000/svg">
+            <path fill="#24232C" d="m5.106 12 6-6-6-6-1.265 1.265 3.841 3.84H.001v1.79h7.681l-3.841 3.84z" />
+          </svg></button>
 
       </div>
     </main>

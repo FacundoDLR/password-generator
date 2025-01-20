@@ -6,6 +6,7 @@ const checkboxes = document.querySelectorAll("input[type='checkbox']");
 const generateButton = document.getElementById("generatePassword");
 const bars = document.querySelectorAll('.bar');
 const strengthText = document.getElementById('strengthLabel');
+const copiedText = document.getElementById('copiedText');
 
 const CHAR_SETS = {
     lowercase: "abcdefghijklmnopqrstuvwxyz",
@@ -24,7 +25,10 @@ input.addEventListener("input", (event) => updateLengthDisplay(event.target.valu
 const copytoClipboard = () => {
     if (textField.value) {
         navigator.clipboard.writeText(textField.value)
-            .then(() => alert("¡Texto copiado al portapapeles!"))
+            .then(() => {
+                copiedText.textContent = "COPIED";
+                setTimeout(() => copiedText.textContent = "", 1000);
+            })
             .catch(err => console.error("Error al copiar texto:", err));
     } else {
         alert("El campo está vacío, no hay nada que copiar.");
@@ -39,7 +43,7 @@ const getCheckedOptions = () => Array.from(checkboxes).filter(checkbox => checkb
 // Strength bar value
 function updateStrength(strength) {
 
-    const strengthLevels = ["Too weak", "Weak", "Medium", "Strong"];
+    const strengthLevels = ["TOO WEAK", "WEAK", "MEDIUM", "STRONG"];
     const classNames = ["too-weak", "weak", "medium", "strong"];
 
     // Reset strength bar and text
