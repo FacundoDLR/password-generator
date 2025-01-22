@@ -34,6 +34,12 @@
 
   --corner-radius: 0.875rem;
   --error-color: red;
+
+  /* Checkbox */
+  --checkbox-border-color: #8b8c89;
+  --checkbox-checked-color: var(--color-neon-green);
+  --checkbox-disabled-bg-color: #d9d9d9;
+  --checkbox-animation-duration: 0.3s;
 }
 
 /* ------------------------------
@@ -102,39 +108,40 @@ label {
 }
 
 .range-slider {
-    --c: #A4FFAF;/* active color */
-    --l: 5px;/* line thickness*/
-    --s: 28px; /* thumb size*/
-  
-    width: 100%;
-    height: var(--s);
-    /* needed for Firefox*/
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background: none;
-    cursor: pointer;
-    overflow: hidden;
-  }
-  
-  /* chromium */
-  input[type="range" i]::-webkit-slider-thumb {
-    height: var(--s);
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: E6E5EA;
-    transition: .3s;
-  
-    -webkit-appearance: none;
-    appearance: none;
-  
-    border-image: linear-gradient(90deg, var(--c) 50%, #18171F 0) 0 1/calc(50% - var(--l)/2) 100vw/ calc(100vw);
-  }
-  
-  .range-slider:active::-webkit-slider-thumb,
-  .range-slider:focus-visible::-webkit-slider-thumb {
-    background:  #A4FFAF;
-  }
+  --c: #a4ffaf; /* active color */
+  --l: 5px; /* line thickness*/
+  --s: 28px; /* thumb size*/
+
+  width: 100%;
+  height: var(--s);
+  /* needed for Firefox*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* chromium */
+input[type="range" i]::-webkit-slider-thumb {
+  height: var(--s);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: E6E5EA;
+  transition: 0.3s;
+
+  -webkit-appearance: none;
+  appearance: none;
+
+  border-image: linear-gradient(90deg, var(--c) 50%, #18171f 0) 0 1 /
+    calc(50% - var(--l) / 2) 100vw / calc(100vw);
+}
+
+.range-slider:active::-webkit-slider-thumb,
+.range-slider:focus-visible::-webkit-slider-thumb {
+  background: #a4ffaf;
+}
 
 .password-options {
   min-height: 8.25rem; /* 132px */
@@ -178,8 +185,96 @@ input[type="checkbox"] {
   height: 1.25rem;
 }
 
+/* Checkbox base styling */
+input[type="checkbox"] {
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  margin: 6px;
+  padding: 0;
+  border: 2px solid var(--checkbox-border-color);
+  appearance: none;
+  background-color: transparent;
+  outline: none;
+  transition: outline 0.1s, background-color var(--checkbox-animation-duration),
+    transform var(--checkbox-animation-duration);
+}
+
+/* Checked state styling */
+input[type="checkbox"]:checked {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--checkbox-checked-color);
+}
+
+/* Click animation: transient scaling effect */
+input[type="checkbox"]:active {
+  transform: scale(1.1); /* Animation effect only on click */
+}
+input[type="checkbox"]:active + label {
+  transform: scale(1.02); /* Animation effect only on click */
+}
+
+/* Icon and border color update */
+input[type="checkbox"]:not(:disabled):checked {
+  border-color: var(--checkbox-checked-color);
+  background-image: url("../images/icon-check.svg");
+}
+
+/* Focus-visible styling */
+input[type="checkbox"]:focus-visible {
+  outline: 6px solid var(--checkbox-hover-color);
+  transform: scale(1.05);
+}
+
+/* Label styling */
+label {
+  transition: opacity var(--checkbox-animation-duration),
+    transform var(--checkbox-animation-duration);
+}
+
+/* Label animation for checked state */
+input[type="checkbox"]:checked + label {
+  opacity: 0.6; /* Adjust as needed for 'marked' appearance */
+}
+
 .strength-display {
   display: flex;
   gap: 1rem;
   align-items: center;
+}
+
+.strength-bar {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.bar {
+  flex: 1;
+  width: 10px;
+  height: 28px;
+  background-color: transparent;
+  border: 2px solid var(--color-ashWhite);
+}
+
+.filled {
+  background-color: #4caf50;
+}
+
+.bar.filled.too-weak {
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+}
+.bar.filled.weak {
+  background-color: var(--color-orange);
+  border-color: var(--color-orange);
+}
+.bar.filled.medium {
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+}
+.bar.filled.strong {
+  background-color: var(--color-neon-green);
+  border-color: var(--color-neon-green);
 }

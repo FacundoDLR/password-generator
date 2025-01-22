@@ -49,7 +49,7 @@ function updateStrength(strength) {
     // Reset strength bar and text
     bars.forEach(bar => bar.classList.remove('filled'));
     for (let i = 0; i < strength; i++) {
-        bars[i].classList.add('filled');
+        bars[i].className = `bar filled ${classNames[strength - 1]}`;
     }
 
     strengthText.textContent = strengthLevels[strength - 1] || "";
