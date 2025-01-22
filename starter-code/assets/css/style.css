@@ -100,7 +100,7 @@ main {
 
 .password-field-container {
   min-height: 4rem; /* 64px */
-  border: 1px solid red;
+  
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -146,6 +146,10 @@ label {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-size: var(--font-size-regular);
+}
+.strength-label{
+    font-size: var(--font-size-regular);
 }
 
 .password-length-field {
@@ -154,7 +158,7 @@ label {
   flex-direction: column;
   justify-content: space-between;
   margin-block-end: var(--spacing-medium);
-  border: 1px solid red;
+  
 }
 
 .range-slider {
@@ -199,9 +203,9 @@ input[type="range" i]::-webkit-slider-thumb {
   min-height: 8.25rem; /* 132px */
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: flex-start;
-  border: 1px solid red;
+  
   margin-block-end: var(--spacing-medium);
 }
 
@@ -212,7 +216,7 @@ input[type="range" i]::-webkit-slider-thumb {
 .password-strength,
 #generatePassword {
   min-height: 3.5rem; /* 56px */
-  border: 1px solid red;
+  
 }
 
 .password-strength {
@@ -230,7 +234,7 @@ input[type="range" i]::-webkit-slider-thumb {
 
 .password-box {
   padding: 1rem;
-  border: 1px solid red;
+  
   display: flex;
   flex-direction: column;
 }
@@ -344,6 +348,7 @@ input[type="checkbox"]:checked + label {
   background-color: var(--color-neon-green);
   border: none;
   cursor: pointer;
+  font-size: var(--font-size-regular);
 }
 
 .button:hover {
@@ -355,4 +360,40 @@ input[type="checkbox"]:checked + label {
 
 .button:hover svg path {
   fill: var(--color-neon-green);
+}
+
+@media screen and (min-width: 768px) {
+    main{
+        gap: 1.5rem;
+    }
+    .container{
+        gap: 1.123rem;
+    }
+    .password-field-container{
+        min-height: 5rem;
+    }
+    .password-length-field{
+        min-height: 5.43rem;
+    }
+    .password-options{
+        min-height: 9.5rem;
+    }
+    .password-strength{
+        min-height: 4.5rem;
+    }
+    .button{
+        min-height: 4.063rem;
+    }
+    .password-box{
+        padding: 2rem;
+    }
+    .password-strength {
+        margin-block-end: var(--spacing-medium);
+    }
+    .strength-label{
+        font-size: var(--font-size-medium);
+    }
+    .output{
+        font-size: var(--font-size-large) !important;
+    }
 }
