@@ -23,11 +23,11 @@ Your users should be able to:
 
 **PC Screenshot (1440x900)**
 
-<img src="https://password-generator-mf31.vercel.app/starter-code/assets/screenshots/MacBook Pro-passwordGenerator.jpeg" width="1280" height="auto">
+<img src="https://password-generator-mf31.vercel.app/assets/screenshots/MacBookPro-passwordGenerator.jpeg" width="1280" height="auto">
 
 **MOBILE Screenshot (375x667)**
 
-<img src="https://password-generator-mf31.vercel.app/starter-code/assets/screenshots/iPhone-passwordGenerator.jpeg" width="768" height="auto">
+<img src="https://password-generator-mf31.vercel.app/assets/screenshots/iPhone-passwordGenerator.jpeg" width="768" height="auto">
 
 ### 📎 Links
 
@@ -48,7 +48,7 @@ Your users should be able to:
 - Responsive design
 - Vanilla JS
 
-### Useful resources
+### Useful resources 📚
 
 - [How to Create a Custom Range Slider Using CSS](https://www.sitepoint.com/css-custom-range-slider/) 
 - [Custom Styling Checkboxes: The Modern Way](https://dev.to/adbutterfield/custom-styling-checkboxes-the-modern-way-3o42)
